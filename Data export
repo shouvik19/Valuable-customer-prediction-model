@@ -1,0 +1,35 @@
+
+# sql outfile for extracting base in R
+
+#### These customers are excluded from the analysis because of inconsistent json columns  ####
+
+select * from SVOC where eos_user_id not in ('165895',
+	'21737',
+	'49350',
+	'53688',
+	'71765',
+	'74519'
+	) and fiscal_2015='Y'
+INTO 
+OUTFILE '/opt/cactusops/train_test.txt'
+FIELDS TERMINATED BY '|' 
+LINES TERMINATED BY '\n'
+;
+
+# Extracting out-of-time-validation data in R
+
+select * from SVOC where eos_user_id not in ('165895',
+	'21737',
+	'49350',
+	'53688',
+	'71765',
+	'74519'
+	) and fiscal_2016='Y'
+INTO 
+OUTFILE '/opt/cactusops/Out_of_time.txt'
+FIELDS TERMINATED BY '|' 
+LINES TERMINATED BY '\n'
+;
+-----
+
+
